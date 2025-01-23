@@ -33,8 +33,8 @@
         console.log(`개수: ${total}`);
         */
 
-        for(var i=1; i<=num; i++) {
-            for(var j=1; i % j !== 0; j++) {}
+        for(var i=2; i<=num; i++) {
+            for(var j=2; i % j !== 0; j++) {}
             if(j === i) {
                 console.log(`소수: ${i}`);
                 total += 1;
