@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Dooly game - 위치값으로 충돌 감지</title>
+
+    <style>
+      #div {
+        border: 2px solid black;
+        width: 200px;
+        height: 170px;
+        position: absolute;
+        top: 180px;
+        left: 500px;
+      }
+      /* #dooly {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        left: 30px;
+        top: 30px;
+        background-image: url('dooly.jpg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      } */
+    </style>
+  </head>
+
+  <body>
+    <div id="div"></div>
+    <!-- <div id="dooly"></div>  -->
+    <img
+      id="dooly"
+      src="dooly.jpg"
+      width="100px"
+      style="position: absolute; left: 30px; top: 30px"
+    />
+
+    <script>
+      const $dooly = document.getElementById("dooly");
+      const $box = document.getElementById("div");
+
+      let step = 50;
+      let doolyCurrentLeft = 30;
+      let doolyCurrentTop = 30;
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight") {
+          console.log("오른쪽 방향키 이벤트 발생");
+          doolyCurrentLeft += step;
+        } else if (event.key === "ArrowLeft") {
+          console.log("왼쪽 방향키 이벤트 발생");
+          doolyCurrentLeft -= step;
+        } else if (event.key === "ArrowDown") {
+          console.log("아래쪽 방향키 이벤트 발생");
+          doolyCurrentTop += step;
+        } else if (event.key === "ArrowUp") {
+          console.log("위쪽 방향키 이벤트 발생");
+          doolyCurrentTop -= step;
+        }
+
+        $dooly.style.left = doolyCurrentLeft + "px";
+        $dooly.style.top = doolyCurrentTop + "px";
+
+        checkCollision();
+      });
+
+      //   function checkCollision() {
+      //     const doolyX = doolyCurrentLeft;
+      //     const doolyY = doolyCurrentTop;
+      //     const doolyWidth = $dooly.offsetWidth;
+      //     const doolyHeight = $dooly.offsetHeight;
+      //     const doolyRight = doolyX + doolyWidth;
+      //     const doolyBottom = doolyY + doolyHeight;
+
+      //     const boxX = parseInt(window.getComputedStyle($box).left);
+      //     const boxY = parseInt(window.getComputedStyle($box).top);
+      //     const boxWidth = $box.offsetWidth;
+      //     const boxHeight = $box.offsetHeight;
+      //     const boxRight = boxX + boxWidth;
+      //     const boxBottom = boxY + boxHeight;
+
+      //     if (
+      //       doolyRight > boxX &&
+      //       doolyX < boxRight &&
+      //       doolyBottom > boxY &&
+      //       doolyY < boxBottom
+      //     ) {
+      //       $box.style.backgroundColor = "red";
+      //     } else {
+      //       $box.style.backgroundColor = "transparent";
+      //     }
+      //   }
+
+      function checkCollision() {
+        const doolyRect = $dooly.getBoundingClientRect();
+        const boxRect = $box.getBoundingClientRect();
+
+        if (
+          doolyRect.right > boxRect.left &&
+          doolyRect.left < boxRect.right &&
+          doolyRect.bottom > boxRect.top &&
+          doolyRect.top < boxRect.bottom
+        ) {
+          $box.style.backgroundColor = "black";
+        } else {
+          $box.style.backgroundColor = "transparent";
+        }
+      }
+    </script>
+  </body>
+</html>

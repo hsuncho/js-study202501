@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Dooly game</title>
+  </head>
+
+  <body>
+    Score
+    <input type="text" value="0" id="score" style="width: 50px" readonly />
+    &nbsp;&nbsp; Step
+    <input type="text" value="1" id="step" style="width: 50px" readonly />
+
+    <img
+      id="dooly"
+      src="dooly.jpg"
+      width="100px"
+      style="position: absolute; left: 0px; top: 200px"
+    />
+
+    <script>
+      const $dooly = document.getElementById("dooly");
+
+      let step = 1;
+      let score = 0;
+      let left = 0;
+      let doolyTop = 100;
+      let arrival = false;
+      let topStep = 50;
+      let doolyInterval;
+
+      doolyInterval = setInterval(() => {
+        direction();
+        $dooly.style.top = doolyTop + "px";
+        $dooly.style.left = left + "px";
+
+        if (doolyTop > window.innerHeight - $dooly.height) {
+          clearInterval(doolyInterval);
+          doolyInterval = null;
+        }
+      }, 100);
+
+      function direction() {
+        if (left >= window.innerWidth - $dooly.width) { // 화면 오른쪽 끝 도달
+          arrival = true;
+          doolyTop += topStep;
+        } else if (left <= 0) { // 화면 왼쪽 끝 도달
+          arrival = false;
+          doolyTop += topStep;
+        }
+
+        if (arrival) {
+          left -= step;
+        } else {
+          left += step;
+        }
+      }
+
+      $dooly.addEventListener("mousedown", () => {
+        if(doolyInterval) {
+          step *= 2;
+          score += 10;
+          document.getElementById("step").value = step;
+          document.getElementById("score").value = score;
+        } else {
+          alert('게임이 종료되었습니다.')
+        }
+      });
+    </script>
+  </body>
+</html>
