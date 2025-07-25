@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+       const x = 'a';
+       console.log(x);
+
+    //    x = 'b'; (x) 상수는 값의 변경이 불가능
+
+    // const와 객체 (객체, 배열, 함수)
+    const person = {
+        name: 'park',
+        age: 20
+    };
+
+    // 변수에는 객체에 대한 주소값(주소값 변화 x)
+    // 객체 내의 프로퍼티 값을 변경하는 것은
+    // 객체 주소값이 바뀌는 것은 아니므로 괜찮다.
+
+    person.name = 'kim';
+    console.log(person.name);
+
+    // 안되는 코드: 객체 자체를 변경하는 행위
+    // person = {
+    //     name: 'lee',
+    //     age: 20
+    // }
+
+    const arr = [1, 2, 3];
+    arr[1] = 'a';
+    console.log(arr);
+    
+    </script>
+</body>
+</html>
